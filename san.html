@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Highcharts Sankey Diagram</title>
+  <!-- Load Highcharts library -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/sankey.js"></script>
+</head>
+<body>
+  <div id="container" style="min-width: 300px; height: 400px; margin: 0 auto;"></div>
+
+  <script>
+    // Data
+    var data = [
+      // Pengobatan 1 to Pengobatan 2
+  ['Pharmacy', 'Pharmacy', 4],
+  ['Pharmacy', 'Community health center', 5],
+  ['Pharmacy', 'Private doctor', 1],
+  ['Pharmacy', 'Private clinic', 2],
+  ['Pharmacy', 'Traditional medicine', 1],
+  ['Pharmacy', 'PHC', 23],
+  ['Pharmacy', 'Hospital', 2],
+
+  ['Community health center', 'PHC', 5],
+  ['Community health center', 'Hospital', 3],
+
+  ['Home remedies', 'Pharmacy', 10],
+  ['Home remedies', 'Community health center', 1],
+  ['Home remedies', 'Private clinic', 1],
+  ['Home remedies', 'PHC', 7],
+  ['Home remedies', 'Hospital', 1],
+  ['Home remedies', 'Local drug store', 6],
+
+  ['Private doctor', 'Community health center', 2],
+  ['Community health center', 'Confirmed', 2],
+  ['Private doctor', 'PHC', 2],
+  ['Private doctor', 'Hospital', 1],
+
+  ['Private clinic', 'Pharmacy', 1],
+  ['Private clinic', 'Community health center', 2],
+  ['Private clinic', 'home remedies', 2],
+  ['Private clinic', 'Private clinic', 1],
+  ['Private clinic', 'PHC', 9],
+  ['Private clinic', 'Hospital', 2],
+
+  ['Traditional medicine', 'Pharmacy', 1],
+  ['Traditional medicine', 'PHC', 3],
+  ['Traditional medicine', 'Local drug store', 1],
+
+  ['PHC', 'Confirmed', 23],
+  ['PHC', 'Pharmacy', 1],
+  ['PHC', 'Private clinic', 1],
+  ['PHC', 'PHC', 17],
+
+  ['Hospital', 'Confirmed', 1],
+  ['Hospital', 'Community health center', 2],
+  ['Hospital', 'PHC', 7],
+  ['Hospital', 'Hospital', 10],
+
+  ['Local drug store', 'Pharmacy', 5],
+  ['Local drug store', 'Community health center', 1],
+  ['Local drug store', 'Private doctor', 1],
+  ['Local drug store', 'PHC', 6],
+  ['Local drug store', 'Hospital', 1],
+  ['Local drug store', 'Local drug store', 1]
+
+
+
+      // Pengobatan 2 to Pengobatan 3
+      ['Pharmacy', 'Community health center', 1],
+      ['Pharmacy', 'PHC', 3],
+      ['Community health center', 'PHC', 5],
+      ['Private doctor', 'PHC', 1],
+      ['Private clinic', 'PHC', 2],
+      ['Traditional medicine', 'PHC', 1],
+      ['PHC', 'Confirmed', 18],
+      ['PHC', 'PHC', 5],
+      ['Hospital', 'PHC', 1],
+      ['Hospital', 'Hospital', 1],
+      ['PHC', 'Confirmed', 5],
+      ['Pharmacy', 'Pharmacy', 1],
+      ['Pharmacy', 'Community health center', 3],
+      ['Pharmacy', 'PHC', 6],
+      ['Community health center', 'Hospital', 1],
+      ['Private clinic', 'PHC', 1],
+      ['PHC', 'Confirmed', 3],
+      ['PHC', 'PHC', 4],
+      ['Hospital', 'PHC', 1],
+      ['Local drug store', 'Pharmacy', 3],
+      ['Local drug store', 'PHC', 3],
+      ['Community health center', 'Confirmed', 1],
+      ['Community health center', 'Hospital', 1],
+      ['PHC', 'Confirmed', 1],
+      ['Hospital', 'PHC', 1],
+      ['Pharmacy', 'PHC', 1],
+      ['Community health center', 'PHC', 2],
+      ['Home remedies', 'PHC', 2],
+      ['Private clinic', 'Private clinic', 1],
+      ['PHC', 'Confirmed', 2],
+      ['PHC', 'Community health center', 1],
+      ['PHC', 'PHC', 6],
+      ['Hospital', 'PHC', 1],
+      ['Hospital', 'Hospital', 1],
+      ['Pharmacy', 'PHC', 1],
+      ['PHC', 'PHC', 3],
+      ['Local drug store', 'PHC', 1],
+      ['Pharmacy', 'Home remedies', 1],
+      ['Private clinic', 'PHC', 1],
+      ['PHC', 'Confirmed', 10],
+      ['PHC', 'PHC', 7],
+      ['Community health center', 'PHC', 2],
+      ['PHC', 'Confirmed', 3],
+      ['PHC', 'Hospital', 1],
+      ['Hospital', 'Confirmed', 2],
+      ['Hospital', 'PHC', 5],
+      ['Hospital', 'Hospital', 3],
+      ['Pharmacy', 'Community health center', 1],
+      ['Pharmacy', 'PHC', 4],
+      ['Community health center', 'Hospital', 1],
+      ['Private doctor', 'PHC', 1],
+      ['PHC', 'Confirmed', 6],
+      ['Hospital', 'Confirmed', 1],
+      ['Hospital', 'PHC', 1],
+      ['Local drug store', 'PHC', 1],
+
+      // Pengobatan 3 to Pengobatan 4
+      ['Pharmacy','PHC',	4],
+['Community health center',	'Confirmed' ,	1],
+['Community health center',	'PHC',	5]
+['Home remedies',	'PHC',	1],
+['Private clinic',	'PHC',	1],
+['PHC',	'Confirmed' ,	72],
+['PHC',	'PHC'	,5],
+['Hospital' ,	'Confirmed' ,	6],
+['Hospital' ,	'PHC',	2],
+['Hospital' ,	'Hospital', 	1],
+
+      // Pengobatan 4 to Pengobatan 5
+      ['PHC',	'Confirmed'	,18],
+['Hospital' ,	'Confirmed',	1],
+
+    ];
+
+    // Create Sankey diagram
+    // Create Sankey diagram
+    Highcharts.chart('container', {
+      title: {
+        text: 'Highcharts Sankey Diagram'
+      },
+      chart: {
+  type: 'sankey',
+  width: null // Gunakan null agar grafik dapat menyesuaikan ukuran layar
+},
+
+      plotOptions: {
+        sankey: {
+          nodePadding: 20, // Atur jarak antara node
+          nodeWidth: 50 // Atur lebar node
+        }
+      },
+      series: [{
+        keys: ['from', 'to', 'weight'],
+        data: data,
+        type: 'sankey',
+        name: 'Sankey Pengobatan',
+        minPointLength: 5 // Atur panjang minimum untuk tautan
+      }]
+    });
+  </script>
+</body>
+</html>
